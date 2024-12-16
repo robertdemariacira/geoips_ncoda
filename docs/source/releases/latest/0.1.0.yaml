@@ -1,0 +1,86 @@
+Major New Functionality:
+  - title: "Add standard top level and installation files"
+    description: |
+      Standard README, release notes for initial release, and pyproject.toml
+      installation specifications.
+    files:
+      added:
+        - "README.md"
+        - "docs/source/releases/latest/0.1.0.yaml"
+        - "pyproject.toml"
+        - "tests/scripts/test_config.yaml"
+      deleted:
+        - ""
+      modified:
+        - ""
+      moved:
+        - ""
+    related-issue:
+      number: 0
+      repo_url: "https://github.com/NRLMMD-GEOIPS/geoips"
+  - title: "Add @reader functionality 1@"
+    description: |
+      * @functionality 1 description
+    files:
+      added:
+        - "@package@/interface_modules/readers/@my_reader@"
+      deleted:
+        - ""
+      modified:
+        - ""
+      moved:
+        - ""
+    related-issue:
+      number: 0
+      repo_url: "https://github.com/NRLMMD-GEOIPS/geoips"
+  - title: "Add @module functionality 2@"
+    description: |
+      * @functionality 2 description
+    files:
+      added:
+        - "@package@/interface_modules/@module_type@/@my_module@"
+      deleted:
+        - ""
+      modified:
+        - ""
+      moved:
+        - ""
+    related-issue:
+      number: 0
+      repo_url: "https://github.com/NRLMMD-GEOIPS/geoips"
+Testing Updates:
+  - title: "Add standard test scripts"
+    description: |
+      Include:
+
+      * complete test script for full package integration tests.
+      * Direct single source test calls.
+      * Complete functionality integration test.
+      * YAML procflow config to produce all available products.
+
+        * @product1 test description@
+        * @product2 test description@
+    files:
+      added:
+        - "tests/test_all.sh"
+        - "@tests/scripts/@mydatatype@.tc.@product@.imagery_clean.sh@"
+        - "tests/scripts/test_config.sh"
+        - "tests/scripts/test_config.yaml"
+      deleted:
+        - ""
+      modified:
+        - ""
+      moved:
+        - ""
+    related-issue:
+      number: 0
+      repo_url: "https://github.com/NRLMMD-GEOIPS/geoips"
+  - title: "Versions including updates to template_basic_plugin repo"
+    description: |
+      To ensure release note is updated with each release, and to track which versions
+      actually resulted in updates on template_basic_plugin, always add the currently
+      tagged version to this list.
+    files:
+      added:
+        - 1.14.0
+        - 1.14.1
