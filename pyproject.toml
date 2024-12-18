@@ -8,17 +8,20 @@
 [tool.poetry]
 # @ Update with your package name, ie:
 # @ name = "@package@"  # package available at the root of the project
-name = "my_package" # package available at the root of the project
-version = "0.0.0"
-description = "@package@ GeoIPS Plugin Package"
-authors = []
+name = "geoips_ncoda" # package available at the root of the project
+version = "0.1.0"
+description = "geoips_ncoda GeoIPS Plugin Package"
+authors = [
+    "Galina Chirokova <galina.chirokova@colostate.edu>",
+    "Robert DeMaria <robert.demaria@colostate.edu>",
+]
 readme = "README.md"
 keywords = []
 license = "LICENSE" # required
 classifiers = [ # // list of PyPI trove classifiers to describe the project
     "Programming Language :: Python :: 3",
 ]
-repository = "https://github.com/NRLMMD-GEOIPS/@package@"
+repository = "https://github.com/robertdemariacira/geoips_ncoda"
 #documentation = "set the url"
 include = ["**/*.txt", "**/*.py", "**/*.yaml"]
 
@@ -47,8 +50,8 @@ build-backend = "poetry_dynamic_versioning.backend"                          # o
 
 [tool.poetry.dependencies] # Include any python dependencies here
 python = ">=3.10.0" # mandatory to declare the required python version
-# "matplotlib" = "*"
-# "xarray" = "*"
+"numpy" = "*"
+"ncoda_util" = {git = "https://github.com/robertdemariacira/ncoda_util.git" }
 
 # All plugins within the "@package@" package are automatically discovered
 # during the plugin registry process.
@@ -56,4 +59,4 @@ python = ">=3.10.0" # mandatory to declare the required python version
 [tool.poetry.plugins."geoips.plugin_packages"]
 # @ Update with your package name, ie:
 # @ "@package@" = "@package@"
-"my_package" = "my_package"
+"geoips_ncoda" = "geoips_ncoda"
