@@ -1,0 +1,21 @@
+interface: products
+family: list
+name: ncoda_test_fully_specified
+docstring: |
+  A product to test NCODA plugin functionality.
+spec:
+  products:
+    - name: ncoda_test
+      source_names: [ncoda]
+      docstring: |
+        NCODA test
+      family: unsectored_xarray_dict_to_algorithm_to_output_format
+      spec:
+        algorithm:
+          plugin:
+            name: ncoda_algorithm
+            arguments:
+              fill_value: -1
+
+            docstring: Generates NCODA test otput
+        variables: ["sst", "sea_height", "salinity"]

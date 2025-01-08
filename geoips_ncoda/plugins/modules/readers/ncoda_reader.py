@@ -1,3 +1,5 @@
+"""NCODA reader plugin."""
+
 import datetime as dt
 import logging
 import pathlib
@@ -20,7 +22,6 @@ LAT_NAME = "latitude"
 # Maps filename prefixes to variable names
 PREFIX_TO_VAR_MAP = {
     "seatmp": "sst",
-    "seahgt": "sea_height",
     "salint": "salinity",
 }
 
@@ -34,6 +35,8 @@ METADATA_GROUP_NAME = "METADATA"
 
 DEFAULT_TIME_REGEX = r"\w+(?P<time>_\d{10}_\d{4})\d+\w+$"
 DEFAULT_TIME_FORMAT = "_%Y%m%d%H_%M%S"
+
+TIME_ATTR = "time"
 
 
 def call(
@@ -76,7 +79,7 @@ def call(
 
     attrs = {
         "source_name": source_name,
-        "time": file_time,
+        TIME_ATTR: file_time,
         "start_datetime": file_time,
         "end_datetime": file_time,
     }
