@@ -57,7 +57,8 @@ run_procflow \
     --filename_formatter geoips_fname \
     --minimum_coverage 0 \
     --no_presectoring \
-    --reader_kwargs '{"source_name": "ncoda"}'
+    --reader_kwargs '{"source_name": "ncoda"}' \
+    --output_formatter_kwargs '{"output_dir":"tests/outputs/ncoda_test/"}'
 ss_retval=$?
 
 exit $((ss_retval))

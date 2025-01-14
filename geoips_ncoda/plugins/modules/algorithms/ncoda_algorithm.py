@@ -68,7 +68,7 @@ LON_NAME = "lon"
 LAT_NAME = "lat"
 DIMS = (LAT_NAME, LON_NAME)
 
-GLOBAL_ATTRS = {"Satellite\ Sensor": "DERIVED DATA", "instrument_name": "NTDM_GLB"}
+GLOBAL_ATTRS = {r"Satellite\ Sensor": "DERIVED DATA", "instrument_name": "NTDM_GLB"}
 
 
 def call(
@@ -83,7 +83,10 @@ def call(
     xr_coords_dict = {LAT_NAME: ([LAT_NAME], lat_1d), LON_NAME: ([LON_NAME], lon_1d)}
 
     ds_data = {}
+
+    # TODO:Instead of creating empty data, call NCODA library to generate data.
     empty_data = np.zeros((lat_1d.shape[0], lon_1d.shape[0]), dtype=np.float32)
+
     for var_name, attrs in ATTRS.items():
         var_da = xr.DataArray(
             data=empty_data, dims=DIMS, coords=xr_coords_dict, attrs=attrs
@@ -97,4 +100,8 @@ def call(
     global_attrs["time_coverage_end"] = time_str
     ncoda_data = xr.Dataset(ds_data, attrs=global_attrs)
 
-    return {ncoda_reader.GROUP_NAME: ncoda_data}
+    metadata = xarray_dict[ncoda_reader.METADATA_GROUP_NAME]
+    return {
+        ncoda_reader.GROUP_NAME: ncoda_data,
+        ncoda_reader.METADATA_GROUP_NAME: metadata,
+    }
