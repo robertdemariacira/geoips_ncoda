@@ -51,7 +51,7 @@ build-backend = "poetry_dynamic_versioning.backend"                          # o
 [tool.poetry.dependencies] # Include any python dependencies here
 python = ">=3.10.0" # mandatory to declare the required python version
 "numpy" = "*"
-"ncoda_util" = {git = "https://github.com/robertdemariacira/ncoda_util.git" }
+"ncoda_proc" = {git = "https://github.com/galina-cira/ncoda_proc.git" }
 
 # All plugins within the "@package@" package are automatically discovered
 # during the plugin registry process.

@@ -8,7 +8,7 @@ from typing import Dict, List, Optional
 
 import pyresample
 import xarray as xr
-from ncoda_util import reader
+from ncoda_proc import reader
 
 log = logging.getLogger(__name__)
 
