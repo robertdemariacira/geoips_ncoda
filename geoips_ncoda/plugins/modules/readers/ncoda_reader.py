@@ -50,7 +50,38 @@ def call(
     prefix_to_coord_map: Dict[str, str] = PREFIX_TO_COORD_MAP,
     time_regex: str = DEFAULT_TIME_REGEX,
     time_format: str = DEFAULT_TIME_FORMAT,
-) -> Dict[str, xr.DataArray]:
+) -> Dict[str, xr.Dataset]:
+    """Reads NCODA ocean data.
+
+    Args:
+        fnames (List[str]): List of filenames.
+        source_name (str): GeoIPS source name.
+        metadata_only (bool, optional): Required by GeoIPS, currently unused.
+            Defaults to False.
+        chans (Optional[List[str]], optional): Required by GeoIPS, currently
+            unused. Defaults to None.
+        area_def (Optional[pyresample.geometry.AreaDefinition], optional):
+            Required by GeoIPS, currently unused. Defaults to None.
+        self_register (bool, optional): Required by GeoIPS, currently unused.
+            Defaults to False.
+        prefix_to_var_map (Dict[str, str], optional): Maps file prefixes to the
+            variable the file contains. Defaults to PREFIX_TO_VAR_MAP.
+        prefix_to_coord_map (Dict[str, str], optional): Maps file prefixes to
+            the coordinate the file contains. Defaults to PREFIX_TO_COORD_MAP.
+        time_regex (str, optional): Regular expression used to extract time
+            information from a filename. Must provied a named capture group
+            called "time". Defaults to DEFAULT_TIME_REGEX.
+        time_format (str, optional): The strftime format to use to extract time
+            from the "time" named capture group found by the time_regex.
+            Defaults to DEFAULT_TIME_FORMAT.
+
+    Raises:
+        ValueError: If no files are found that can be used to extract time
+        information from.
+
+    Returns:
+        Dict[str, xr.Dataset]: GeoIPS reader plugin dictionary of Datasets.
+    """
     paths = [pathlib.Path(f) for f in fnames]
     vars_to_paths = _make_var_to_path_map(paths, prefix_to_var_map)
     coords_to_paths = _make_var_to_path_map(paths, prefix_to_coord_map)

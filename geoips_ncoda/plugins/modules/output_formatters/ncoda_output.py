@@ -2,7 +2,7 @@
 
 import logging
 import pathlib
-from typing import Any, Dict, List, Union
+from typing import Dict, List
 
 import xarray as xr
 
@@ -22,6 +22,20 @@ def call(
     output_dir: str,
     filename_format: str = DEFAULT_FILENAME_FORMAT,
 ) -> List[str]:
+    """Writes NCODA ocean data as AWIPS compatible netCDF file.
+
+    Args:
+        xarray_obj (Dict[str, xr.Dataset]): GeoIPS dictionary of Datasets.
+            Assumes this is coming from the ncoda_algorithm plugin.
+        output_dir (str): The directory to write the netCDF file
+        filename_format (str, optional): Format string used to generate the
+            output filename. Can use "start_time" which will be the
+            start_datetime datetime object provided by the metadata. Defaults to
+            DEFAULT_FILENAME_FORMAT.
+
+    Returns:
+        List[str]: List containing the written netCDF filename.
+    """
     metadata = xarray_obj[ncoda_reader.METADATA_GROUP_NAME]
     start_datetime = metadata.attrs["start_datetime"]
 

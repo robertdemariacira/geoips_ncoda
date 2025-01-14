@@ -74,7 +74,30 @@ GLOBAL_ATTRS = {r"Satellite\ Sensor": "DERIVED DATA", "instrument_name": "NTDM_G
 def call(
     xarray_dict: Dict[str, Dict[str, Any]],
     fill_value: Optional[int] = None,
-):
+) -> Dict[str, Dict[str, Any]]:
+    """Performs the NCODA ocean data algorithm.
+
+    Produces a Dataset containing the following variables:
+    NTDM_GLB_OHC26, NTDM_GLB_SST, NTDM_GLB_SSS, NTDM_GLB_TD100, NTDM_GLB_Tdy_c,
+    NTDM_GLB_Tdy_p
+
+    WARNING: This is currently a placeholder implementation that will contain
+    entirely missing data.
+
+    Args:
+        xarray_dict (Dict[str, Dict[str, Any]]): GeoIPS dictionary of Datasets
+            assumed to be provided by the ncoda_reader plugin.
+        fill_value (Optional[int], optional): Required by GeoIPS, currently
+            unused. Defaults to None.
+
+    Returns:
+        Dict[str, Dict[str, Any]]: GeoIPS dictionary of Datasets.  This will
+            contain a Dataset mapped to key: "ncoda" which will contain the
+            six generated NCODA ocean data variables and their associated
+            metadata.  This will also contain the METADATA dataset produced by
+            the reader and required by GeoIPS.  This output can by used with
+            the ncoda_output plugin to produce an AWIPS compatible netCDF file.
+    """
     ncoda_ds = xarray_dict[ncoda_reader.GROUP_NAME]
     file_time = ncoda_ds.attrs[ncoda_reader.TIME_ATTR]
     lat_1d = ncoda_ds[ncoda_reader.LAT_NAME].data[0, :]

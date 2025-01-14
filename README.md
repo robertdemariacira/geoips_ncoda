@@ -1,84 +1,31 @@
     # # # This source code is protected under the license referenced at
     # # # https://github.com/NRLMMD-GEOIPS.
 
-Basic GeoIPS Plugin Template
-=============================
+# geoips_ncoda
 
-This template repository contains everything necessary to create a fully
-compatible GeoIPS Plugin Package.  Each file within this repository contains
-appropriate modification instructions.
+Provides GeoIPS plugins for working with NCODA Ocean Data and producing AWIPS
+compatible netCDF files.
 
-To create your own functional plugin for GeoIPS, follow the
-[step by step instructions](./docs/source/userguide/template_instructions.rst) for
-modifying the template files within this repo.
+Three plugins are provided:
+- `geoips_ncoda.plugins.modules.readers.ncoda_reader`:
+    - Reads NCODA data and outputs the standard GeoIPS dictionary of Datasets.
+- `geoips_ncoda.plugins.modules.algorithms.ncoda_algorithm`:
+    - Uses data read from the NCODA reader plugin, runs the NCODA algorithm to
+        produce the following six variables: `NTDM_GLB_OHC26, NTDM_GLB_SST, NTDM_GLB_SSS, NTDM_GLB_TD100, NTDM_GLB_Tdy_c, NTDM_GLB_Tdy_p`.
+    - WARNING: Currently this will exclusively produce missing data and the 
+        current code is intended to be a placeholder until this functionality is
+        implemented.
+- `geoips_ncoda.plugins.modules.output_formatters.ncoda_output`:
+    - Assumes that input is coming from the `ncoda_algorithm` plugin and writes
+        an AWIPS compatible netCDF file from the data.
 
-@ Once this repository has been set up properly, you can remove this "Basic
-GeoIPS Plugin Template" section in the README.md, leaving the appropriate
-content for your package's README file.
+## Test Case
+A test case is provided to demonstrate usage and verify output is produced correctly.
+The test case assumes that the `tests/scripts/get_test_data.sh` script has been run
+to obtain the data the test uses.
 
+The test case can be run from the repo root using the command: 
+`tests/scripts/ncoda_test.sh`.
 
-@package@ GeoIPS Plugin
-==========================
-
-The @package@ package is a GeoIPS-compatible plugin, intended to be used within
-the GeoIPS ecosystem.  Please see the
-[GeoIPS Documentation](https://github.com/NRLMMD-GEOIPS/geoips#readme) for
-more information on the GeoIPS plugin architecture and base infrastructure.
-
-Package Overview
------------------
-
-The @package@ plugin provides the capability for
-
-@ Please include a brief description of what capability this package provides.
-
-@ This section should be no more than 1-2 paragraphs, if you have additional
-@ information to include, please include in a "docs" subdirectory.
-
-@ Example overview:
-
-@ The template_basic_plugin package provides template files which can be used to create
-@ a fully compatible GeoIPS plugin.  This template repository is focused on basic functionality -
-@ ie, simple readers, products, output formats, etc.  Additional template repositories will be
-@ created for more sophisticated and complicated use cases.
-
-System Requirements
----------------------
-
-* geoips >= 1.10.0
-* Test data repos contained in $GEOIPS_TESTDATA_DIR for tests to pass.
-* @ Add any additional system requirements, such as gfortran, etc
-
-IF REQUIRED: Install base geoips package
-------------------------------------------------------------
-SKIP IF YOU HAVE ALREADY INSTALLED BASE GEOIPS ENVIRONMENT
-
-If GeoIPS Base is not yet installed, follow the
-[installation instructions](https://github.com/NRLMMD-GEOIPS/geoips#installation)
-within the geoips source repo documentation:
-
-Install @package@ package
-----------------------------
-```bash
-
-    # Ensure GeoIPS Python environment is enabled.
-
-    # Clone and install @package@
-    git clone https://github.com/NRLMMD-GEOIPS/@package@ $GEOIPS_PACKAGES_DIR/@package@
-    pip install -e $GEOIPS_PACKAGES_DIR/@package@
-
-    # Add any additional clone/install/setup steps here
-```
-
-Test @package@ installation
------------------------------
-```bash
-
-    # Ensure GeoIPS Python environment is enabled.
-
-    # This script will run ALL tests within this package
-    $GEOIPS_PACKAGES_DIR/@package@/tests/test_all.sh
-
-    # Individual direct test calls, for reference
-    $GEOIPS_PACKAGES_DIR/@package@/tests/scripts/<test_script_name>.sh
-```
+This will create the following AWIPS compatible netCDF file: 
+`tests/outputs/ncoda_test/A2NCGRD_NTDM_GLB_20230907_0000.nc`
